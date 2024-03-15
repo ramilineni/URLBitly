@@ -44,7 +44,7 @@ namespace UserRegistration.Controllers
             var longUrl = $"https://{host}/Page/Index?token={randomString}";
 
 
-            pageExpiration.BitlyUrl = longUrl;
+            pageExpiration.FormUrl = longUrl;
 
             _context.PageExpirations.Add(pageExpiration);
             await _context.SaveChangesAsync();

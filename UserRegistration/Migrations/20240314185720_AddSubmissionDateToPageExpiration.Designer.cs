@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserRegistration.Data;
 
@@ -11,9 +12,11 @@ using UserRegistration.Data;
 namespace UserRegistration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240314185720_AddSubmissionDateToPageExpiration")]
+    partial class AddSubmissionDateToPageExpiration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,9 +46,6 @@ namespace UserRegistration.Migrations
 
                     b.Property<bool>("IsOpened")
                         .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset>("SubmissionDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("token")
                         .IsRequired()
@@ -88,6 +88,9 @@ namespace UserRegistration.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("SubmissionDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 

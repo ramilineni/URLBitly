@@ -44,6 +44,7 @@ namespace UserRegistration.Controllers
                 if (pageExpiration != null)
                 {
                     pageExpiration.IsExpired = true;
+                    pageExpiration.SubmissionDate = DateTimeOffset.Now;
                     _context.Entry(pageExpiration).State = EntityState.Modified;
                 }
 
