@@ -3,17 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using UserRegistration.Data;
+using UserRegistration.Interface;
 using UserRegistration.Models;
+using UserRegistration.Models.RequestModels;
 
 namespace UserRegistration.Controllers
 {
     public class PageController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICallToSaveData _saveData;
 
-        public PageController(ApplicationDbContext context)
+        public PageController(ApplicationDbContext context, ICallToSaveData saveData)
         {
             _context = context;
+            _saveData = saveData;
         }
 
         public IActionResult Index(string token)
@@ -34,6 +38,8 @@ namespace UserRegistration.Controllers
             return View("Submitted");
         }
 
+      
+
         [HttpPost]
         public IActionResult Submit(Patient patient)
         {
@@ -46,8 +52,10 @@ namespace UserRegistration.Controllers
                     pageExpiration.IsExpired = true;
                     pageExpiration.SubmissionDate = DateTimeOffset.Now;
                     _context.Entry(pageExpiration).State = EntityState.Modified;
-                }
+                    bool result = Task.Run(async () => await _saveData.Save(patient)).Result;
 
+                }
+               
                 _context.SaveChanges();
 
                 return RedirectToAction("Index", new { token = patient.PageGuid });

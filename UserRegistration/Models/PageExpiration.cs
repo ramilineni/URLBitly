@@ -9,6 +9,6 @@
         public DateTimeOffset CreatedDate { get; set; }
         public bool IsOpened { get; set; }
         public string FormUrl { get; set; }
-        public DateTimeOffset SubmissionDate { get; set; }
+        public DateTimeOffset? SubmissionDate { get; set; }
     }
 }
