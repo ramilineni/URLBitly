@@ -14,8 +14,6 @@ namespace UserRegistration.Models
         public string PhoneNumber { get; set; }
         [Required]
         public DateTime DateOfBirth { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set;}
         public string PageGuid { get; set; }
  
     }

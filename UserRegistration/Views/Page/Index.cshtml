@@ -1,4 +1,4 @@
-﻿@model UserRegistration.Models.Patient
+﻿@* @model UserRegistration.Models.Patient
 
 @{
     ViewData["Title"] = "Register";
@@ -50,3 +50,262 @@
         </div>
     </div>
 </div>
+ *@
+@model UserRegistration.Models.Patient
+
+@{
+    ViewData["Title"] = "Register";
+    string token = ViewData["Token"] as string;
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<style>
+    h1 {
+        color: #011e41;
+        font: normal normal 700 2.5em "Barlow Condensed", "Open Sans Condensed", Arial, sans-serif;
+        letter-spacing: inherit;
+        line-height: 1;
+        text-align: inherit;
+        text-transform: uppercase;
+        margin: 0 auto;
+    }
+
+    p {
+        color: inherit;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1em;
+        font-style: inherit;
+        font-weight: normal;
+        line-height: 150%;
+        text-align: inherit;
+        text-decoration: inherit;
+    }
+
+    label {
+        color: inherit;
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1em;
+        font-style: inherit;
+        font-weight: 600;
+        line-height: 150%;
+        text-align: inherit;
+        text-decoration: inherit;
+    }
+
+    .form-button {
+        background-color: #011e41;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        font: bold 15px "Spartan", "Open Sans", sans-serif;
+        letter-spacing: .15em;
+        margin: 2px auto;
+        min-width: 0;
+        padding: 1.2em 1.5em 1em;
+        text-transform: uppercase;
+    }
+
+    .form-control {
+        align-items: center;
+        appearance: none;
+        background: #fff;
+        border-radius: 0.5em;
+        border: 1px solid #011e41;
+        color: #011e41;
+        display: flex;
+        float: none;
+        font-family: "Open Sans", Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        height: 2em;
+        justify-content: center;
+        line-height: 1;
+        margin: 10px auto 15px;
+        min-height: 3.2em;
+        min-width: 12em;
+        padding: 0.5em;
+        position: relative;
+        vertical-align: middle;
+        width: 90%;
+        max-width: 500px
+    }
+
+    .logo {
+        margin: 2em auto;
+        width: 80%;
+        max-width: 350px;
+        text-align: center;
+        display: block;
+    }
+
+    .contact-info {
+        max-width: 700px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .hideLabel {
+        display: none;
+    }
+
+    .hideField {
+        display: none;
+    }
+
+    .showField {
+        display: block;
+    }
+
+    .dept-topper {
+        background: #E62003;
+        padding: .5em;
+    }
+
+        .dept-topper > div > h1 {
+            position: relative;
+            margin: 0;
+        }
+
+    .od-form {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .radio input:first-child {
+        opacity: 1;
+        width: 21px;
+        margin-left: 66px;
+        margin-right: -26px;
+    }
+
+    label span {
+        color: #e62003;
+    }
+
+    .infusion-multiselect {
+        min-width: 80%;
+    }
+
+    ::placeholder,
+    select {
+        text-transform: capitalize;
+    }
+
+    #inf_field_Phone1,
+    #inf_field_Email {
+        &::placeholder
+
+    {
+        text-transform: none;
+    }
+
+    }
+
+    .field-error {
+        border: 1px solid #E62003;
+        &::placeholder
+
+    {
+        color: #E62003;
+    }
+
+    }
+
+    select {
+        min-height: 33px;
+        padding: 10px 15px;
+        font-weight: 400;
+        color: #555;
+        width: 100%;
+    }
+
+    option {
+        padding: 5px 0px;
+    }
+
+    .JobOpportunityIntent {
+        padding: 0px 12px;
+    }
+
+    #inf_custom_Whatisyouranticipatedgraduationyear,
+    #inf_custom_HowDidYouHearAboutUsOtherSelected,
+    #inf_custom_Whichbestdescribesme,
+    #inf_custom_Howdidyouhearaboutus {
+        min-width: 100%;
+        display: grid;
+        margin-bottom: 10px;
+    }
+
+    .required-field-disclaimer {
+        margin-top: 10px;
+    }
+
+        .required-field-disclaimer span {
+            color: #e62003;
+        }
+</style>
+
+<div class="container section-static content" style="margin: 0 auto 2em;">
+
+    <div>
+        <div class="dept-topper row">
+            <div>
+                <img class="logo" src="https://vsp.widen.net/content/pbqbe2zghg/svg/visionworks-logo-white.svg" alt="Visionworks logo">
+            </div>
+        </div>
+    </div>
+
+    <div class="od-form">
+
+        <h1 class="text-center">Patient Registration</h1>
+        <p class="text-center">Please enter your contact information:</p>
+
+        <form method="post" action="@Url.Action("Submit", "Page")">
+            <input type="hidden" name="PageGuid" value="@token" />
+            <div class="contact-info center-block">
+
+                <div class="row">
+
+                    <div>
+                        <div class="infusion-field">
+                            <label for="FirstName">First Name<span>*</span></label>
+                            <input class="form-control infusion-field-input" id="FirstName" name="FirstName" placeholder="First Name" type="text" required>
+                        </div>
+
+                        <div class="infusion-field">
+                            <label for="LastName">Last Name<span>*</span></label>
+                            <input class="form-control infusion-field-input" id="LastName" name="LastName" placeholder="Last Name" type="text" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="infusion-field">
+                            <label for="PhoneNumber">Phone<span>*</span></label>
+                            <input maxlength='10' class="form-control infusion-field-input" id="PhoneNumber" name="PhoneNumber" placeholder="xxx-xxx-xxxx (10 Digits)" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+                        </div>
+
+                        <div class="infusion-field">
+                            <label for="DateOfBirth">Date of Birth<span>*</span></label>
+                            <input class="form-control infusion-field-input" id="DateOfBirth" name="DateOfBirth" placeholder="MM/DD/YYYY" type="date" required>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="infusion-submit center-block">
+                        <button class="form-button center-block" type="submit">Submit</button>
+                    </div>
+
+                    <p class="required-field-disclaimer center-block text-center"><span>*</span>Denotes required field</p>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
