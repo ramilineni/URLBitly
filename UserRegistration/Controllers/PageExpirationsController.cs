@@ -24,33 +24,33 @@ namespace UserRegistration.Controllers
 
   
 
-        [HttpPost]
-        public async Task<ActionResult<PageExpiration>> PostPageExpiration()
-        {
-            string randomString = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 10)
-            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        //[HttpPost]
+        //public async Task<ActionResult<PageExpiration>> PostPageExpiration()
+        //{
+        //    string randomString = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 10)
+        //    .Select(s => s[new Random().Next(s.Length)]).ToArray());
 
-            var pageExpiration = new PageExpiration()
-            {
-                Id = Guid.NewGuid(),
-                ExpirationDate = DateTimeOffset.Now.AddDays(2),
-                CreatedDate = DateTimeOffset.Now,
-                IsExpired = false,
-                IsOpened = false,
-                token = randomString
-            };
+        //    var pageExpiration = new PageExpiration()
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        ExpirationDate = DateTimeOffset.Now.AddDays(2),
+        //        CreatedDate = DateTimeOffset.Now,
+        //        IsExpired = false,
+        //        IsOpened = false,
+        //        token = randomString
+        //    };
 
-            var host = HttpContext.Request.Host.Value;
-            var longUrl = $"https://{host}/Page/Index?token={randomString}";
+        //    var host = HttpContext.Request.Host.Value;
+        //    var longUrl = $"https://{host}/Page/Index?token={randomString}";
 
 
-            pageExpiration.FormUrl = longUrl;
+        //    pageExpiration.FormUrl = longUrl;
 
-            _context.PageExpirations.Add(pageExpiration);
-            await _context.SaveChangesAsync();
+        //    _context.PageExpirations.Add(pageExpiration);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPageExpiration", new { id = pageExpiration.Id }, pageExpiration);
-        }
+        //    return CreatedAtAction("GetPageExpiration", new { id = pageExpiration.Id }, pageExpiration);
+        //}
       
     }
 }

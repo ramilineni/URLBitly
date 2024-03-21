@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using UserRegistration.DAL;
 using UserRegistration.Data;
 using UserRegistration.Interface;
+using UserRegistration.Repository;
 using UserRegistration.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICallToSaveData, CallToSaveDataInAmelia>();
+builder.Services.AddScoped<IAmeliaDBDAL, AmeliaDBDAL>();
+builder.Services.AddScoped<IPageExpiration, PageExpirationRepository>();
 builder.Services.AddDbContext<ApplicationDbContext>(
     options =>
     options.UseSqlServer(
