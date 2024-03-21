@@ -1,7 +1,7 @@
-﻿using Amelia.PatientUnderstanding.Entity;
+﻿/*using Amelia.PatientUnderstanding.Entity;
 using Amelia.PatientUnderstanding.Helper;
 using Amelia.PatientUnderstanding.Interface;
-using Amelia.PatientUnderstanding.Model;
+using Amelia.PatientUnderstanding.Model;*/
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -50,6 +50,7 @@ namespace UserRegistration.DAL
                     .WithSqlParam("@IsOpened", pageExpiration.IsOpened)
                     .WithSqlParam("@IsExpired", pageExpiration.IsExpired)
                     .WithSqlParam("@SubmissionDate", isSubmitted ? pageExpiration.SubmissionDate : null)
+                    .WithSqlParam("@Token", pageExpiration.token)
                     .ExecuteStoredProc<bool>();
 
                 return true;
